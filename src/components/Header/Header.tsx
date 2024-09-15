@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useProductContext } from '../../context/contextProduct';
 import './header.css';
 
 const Header: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { wishlistCount } = useProductContext();
 
   // Lógica para cambiar el título según la página actual
   const getTitle = () => {
@@ -29,9 +31,12 @@ const Header: React.FC = () => {
         <h1 className="header-title">{getTitle()}</h1>
 
         {/* Botón para acceder a la lista de deseos */}
-        <Link to="/wishlist" className="wishlist-button">
-          🛒 Lista de Deseos
-        </Link>
+        <div className="wishlist-container">
+          <Link to="/wishlist" className="wishlist-button">
+            🛒 Lista de Deseos
+            {wishlistCount > 0 && <span className="wishlist-count">{wishlistCount}</span>}
+          </Link>
+        </div>
       </div>
     </header>
   );

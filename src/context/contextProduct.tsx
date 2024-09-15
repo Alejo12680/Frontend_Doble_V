@@ -24,6 +24,7 @@ interface ProductContextProps {
   addToWishlist: (product: Product) => void;
   removeFromWishlist: (productId: number) => void;
   wishlist: Product[];
+  wishlistCount: number;
 }
 
 const ProductContext = createContext<ProductContextProps | undefined>(undefined);
@@ -34,6 +35,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [wishlist, setWishlist] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [wishlistCount, setWishlistCount] = useState<number>(0);
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -68,6 +70,8 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const addToWishlist = (product: Product) => {
     setWishlist((prevWishlist) => {
       if (!prevWishlist.find(item => item.id === product.id)) {
+        setWishlist(prevWishlist => [...prevWishlist, product]);
+        setWishlistCount(prevCount => prevCount + 1);
         return [...prevWishlist, product];
       }
       return prevWishlist;
@@ -77,10 +81,11 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({ child
   // Función para eliminar productos del wishlist
   const removeFromWishlist = (productId: number) => {
     setWishlist((prevWishlist) => prevWishlist.filter(product => product.id !== productId));
+    setWishlistCount(prevCount => prevCount - 1);
   };
 
   return (
-    <ProductContext.Provider value={{ products, categories, loading, error, getProductsByCategoryId, addToWishlist, wishlist, removeFromWishlist }}>
+    <ProductContext.Provider value={{ products, categories, loading, error, getProductsByCategoryId, addToWishlist, wishlist, removeFromWishlist, wishlistCount }}>
       {children}
     </ProductContext.Provider>
   );

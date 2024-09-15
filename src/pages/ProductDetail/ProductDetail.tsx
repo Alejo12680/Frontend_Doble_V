@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useProductContext } from '../../context/contextProduct';
+import { IonButton, IonIcon } from '@ionic/react';
+import { heart, logoApple, settingsSharp, star } from 'ionicons/icons';
 import './productDetail.css';
 
 const ProductDetail: React.FC = () => {
@@ -18,12 +20,17 @@ const ProductDetail: React.FC = () => {
   if (!product) return <p>Producto no encontrado...</p>;
 
   return (
+
     <div className="product-detail">
-      <h1>{product.title}</h1>
-      <img src={product.images[0]} alt={product.title} />
-      <p>{product.description}</p>
-      <p>Precio: ${product.price}</p>
-      <button onClick={() => addToWishlist(product)}>Agregar a la lista de deseos</button>
+      <div className="card">
+        <img src={product.images[0]} alt={product.title} className="product-image" />
+        <div className="card-content">
+          <h1>{product.title}</h1>
+          <p>{product.description}</p>
+          <h5><strong>Precio:</strong> ${product.price}</h5>
+          <button onClick={() => addToWishlist(product)} className="add-to-wishlist-btn">Añadir a lista de deseos   <IonIcon slot="end" icon={heart}></IonIcon></button>
+        </div>
+      </div>
     </div>
   );
 };
