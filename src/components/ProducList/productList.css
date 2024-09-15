@@ -1,4 +1,8 @@
 .product-list {
+  padding: 20px;
+}
+
+.products-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -7,7 +11,6 @@
 .product-item {
   border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 5px;
   text-align: center;
   width: 200px;
 }
@@ -16,4 +19,3 @@
   max-width: 100%;
   height: auto;
 }
-

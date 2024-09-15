@@ -1,0 +1,38 @@
+.home {
+  padding: 20px;
+}
+
+.category-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.category-item {
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  width: 150px;
+}
+
+.category-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.product-list {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.product-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  width: 200px;
+}
